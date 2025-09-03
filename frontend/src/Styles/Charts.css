@@ -1,0 +1,105 @@
+
+/* ===== CHARTS ===== */
+
+
+.chart-controls {
+  background: var(--bg-dark);
+  backdrop-filter: blur(20px);
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow:
+    8px 8px 24px rgba(0,0,0,0.6),
+    -8px -8px 24px rgba(70,70,90,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  animation: slideInUp var(--animation-slow) ease-out
+}
+
+/* Labels for checkboxes*/
+.chart-controls label.checkbox-label {
+  display: inline-flex;       
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(26,26,26,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+.chart-controls label.checkbox-label:hover {
+  border-color: #722eff;
+  background: rgba(114,46,255,0.2);
+}
+
+.chart-controls input[type="checkbox"] {
+  background: #722eff;
+  color: white;
+  border-color: #4c64ff;
+}
+
+.chart-controls label {
+  font-weight: 600;
+  color: var(--text--primary);
+  font-size: 1rem;
+}
+
+/* Select styling in chart controls */
+.chart-controls select {
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--bg-dark);
+  color: #f0f0f0;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+  margin-bottom: 10px;
+}
+
+.chart-controls select:focus {
+  outline: none;
+  box-shadow:
+    0 0 8px rgba(114,46,255,0.4),
+    0 0 16px rgba(76,100,255,0.2);
+  border-color: #722eff;
+}
+
+.chart-controls select:hover {
+  border-color: #722eff;
+}
+
+
+/* Category filter container selection */
+.chart-controls > div:last-child {
+  background: var(--bg-light);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== RECHARTS ===== */
+
+.recharts-legend-item-text {
+  color: #e0e0e0 !important;
+  font-weight: 500 !important;
+}
+
+.recharts-default-tooltip {
+  background: rgba(30,30,45,0.95) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+  border: none !important;
+  backdrop-filter: blur(15px) !important;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.85 !important;
+  filter: drop-shadow(0 0 8px #722eff);
+}
+
+

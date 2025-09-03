@@ -1,0 +1,137 @@
+
+/* ===== FORM ===== */
+
+.form {
+  /* Background */
+  background: var(--bg-dark);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--radius-lg);
+  border-radius: var(--radius-2xl);
+  
+  /* Layout and spacing */
+  max-width: 480px;
+  margin: var(--space-2xl) auto;
+  margin-left: 100px;
+  padding: var(--space-2xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  
+  /* Effects */
+  box-shadow:
+    var(--shadow-dark),
+    var(--shadow-light),
+    0 0 40px rgba(102, 126, 234, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated gradient on top border */
+.form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--pdf-gradient);
+  background-size: 200% 100%;
+  animation: gradientShimmer 3s ease-in-out infinite;
+}
+
+/* Hover lift */
+.form:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    16px 16px 32px rgba(0, 0, 0, 0.5),
+    -16px -16px 32px rgba(255, 255, 255, 0.03),
+    0 0 60px rgba(102, 126, 234, 0.2);
+}
+
+@keyframes gradientShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== FORM CONTROLS ===== */
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--space-md);
+}
+
+.form-control label {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: var(--space-md);
+  
+}
+
+.form-control label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background: var(--pdf-gradient);
+  border-radius: 2px;
+
+  
+}
+
+/* Styles the select bars within the form*/
+.form-control input,
+input:not(.form-control input),
+select {
+  padding: 18px var(--space-lg);
+  border: none;
+  outline: none;
+  background: var(--bg-dark);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    var(--shadow-inset-dark),
+    var(--shadow-inset-light);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  display: flex;
+  animation: gradientShimmer 3s ease-in-out infinite;
+}
+
+/* Highlights input with a glow effect and lift */
+.form-control input:focus,
+input:not(.form-control input):focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(102, 126, 234, 0.4);
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.2),
+    0 0 20px rgba(102, 126, 234, 0.3),
+    var(--shadow-inset-dark),
+    var(--shadow-inset-light);
+  transform: translateY(-2px);
+}
+
+/* Text inside form is italic */
+.form-control input::placeholder,
+input:not(.form-control input)::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+
+
+

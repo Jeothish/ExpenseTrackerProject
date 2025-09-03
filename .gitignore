@@ -1,0 +1,30 @@
+# ========== Java Backend ==========
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+target/
+build/
+hs_err_pid*
+replay_pid*
+
+# ========== IDE / Editor ==========
+*.idea/
+*.vscode/
+*.classpath
+*.project
+*.settings/
+*.iml
+
+# ========== Node / React Frontend ==========
+node_modules/
+npm-debug.log*
+yarn-error.log*
+build/
+dist/
+.env

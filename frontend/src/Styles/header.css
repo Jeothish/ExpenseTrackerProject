@@ -1,0 +1,87 @@
+
+/* ===== HEADER ===== */
+
+.header {
+  /* Background with blur and border*/
+  background: var(--bg-dark);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--radius-lg);
+  
+  /* Typography */
+  text-align: center;
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.1;
+
+  /* Spacing and layout */
+  padding: var(--space-2xl) var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  border-radius: var(--radius-2xl);
+
+  /* Effects and animation */
+  box-shadow:
+    var(--shadow-dark),
+    var(--shadow-light),
+    0 0 60px rgba(102, 126, 234, 0.15),
+    inset 0 2px 8px rgba(255, 255, 255, 0.08),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInUp var(--animation-slow) ease-out
+}
+
+/* Gradient underline */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 4px;
+  
+  /* Animated gradient effect */
+  background: 
+    linear-gradient(90deg, 
+      rgba(102, 126, 234, 0.8) 0%, 
+      rgba(118, 75, 162, 0.9) 25%, 
+      rgba(240, 147, 251, 0.8) 50%, 
+      rgba(79, 172, 254, 0.9) 75%, 
+      rgba(102, 126, 234, 0.8) 100%);
+  background-size: 300% 100%;
+  box-shadow: 
+    0 0 20px rgba(102, 126, 234, 0.6),
+    0 0 40px rgba(118, 75, 162, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-lg);
+  animation: gradientFlow 4s ease-in-out infinite;
+}
+
+/* Hover interaction */
+.header:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    16px 16px 32px rgba(0, 0, 0, 0.5),
+    -16px -16px 32px rgba(255, 255, 255, 0.03),
+    0 0 80px rgba(102, 126, 234, 0.25),
+    inset 0 3px 12px rgba(255, 255, 255, 0.12),
+    inset 0 -3px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===== ANIMATIONS ===== */
+
+
+@keyframes gradientFlow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    filter: hue-rotate(0deg);
+  }
+  50% { 
+    background-position: 100% 50%; 
+    filter: hue-rotate(20deg);
+  }
+}
+

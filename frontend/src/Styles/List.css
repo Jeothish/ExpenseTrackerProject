@@ -1,0 +1,104 @@
+
+/* TABLE */
+
+table {
+
+  /* Layout */
+  width: 100%;
+  max-width: 1000px;
+  margin: var(--space-2xl) auto;
+  border-spacing: 0 var(--space-md);
+  
+  /* Styling */
+  background: var(--bg-dark);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--radius-lg);
+  border-radius: var(--radius-2xl);
+  box-shadow: 
+    var(--shadow-dark),
+    var(--shadow-light),
+    0 0 40px rgba(102, 126, 234, 0.1);
+  
+  /* Typgraphy */
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient on top border */
+
+table::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--pdf-gradient);
+  background-size: 200% 100%;
+  animation: gradientShimmer 3s ease-in-out infinite;
+}
+
+/* ===== TABLE COLUMNS AND ROWS ===== */
+
+table th {
+  background: rgba(255, 255, 255, 0.08);
+  color: #a7d6ff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 18px var(--space-lg);
+  text-align: left;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--radius-lg);
+  position: relative;
+}
+
+table th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--pdf-gradient);
+  opacity: 0.3;
+}
+
+table td {
+  padding: 16px var(--space-lg);
+  background: var(--glass-secondary);
+  border-radius: var(--radius-2xl);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+table tr:hover td {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(102, 126, 234, 0.1);
+}
+
+
+table td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: var(--pdf-gradient);
+  border-radius: 2px;
+}
+
+.total-row {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-top: 2px solid var(--pdf-gradient);
+}
+
+

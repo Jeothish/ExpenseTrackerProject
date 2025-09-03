@@ -1,0 +1,153 @@
+
+/* ===== BUTTON ===== */
+
+.btn {
+
+  /* Layout and Spacing */
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px var(--space-xl);
+  
+  /* Typography */
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  
+  /* Effects */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+/* Shine effect on hover*/
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+/* Button lifts on hover*/
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Move shine across the button */
+.btn:hover::before {
+  left: 100%;
+}
+
+
+/* ===== BUTTON VARIANTS ===== */
+
+.btn-add {
+  background: var(--success-gradient);
+  color: white;
+  
+  box-shadow: 
+    0 8px 25px rgba(79, 172, 254, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-add:hover {
+  box-shadow: 
+    0 12px 35px rgba(79, 172, 254, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-delete {
+  background: var(--danger-gradient);
+  color: white;
+  margin: var(--space-lg) auto;
+  box-shadow: 
+    0 8px 25px rgba(250, 112, 154, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-delete:hover {
+  box-shadow: 
+    0 12px 35px rgba(250, 112, 154, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-submit {
+  background: var(--success-gradient);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-submit:hover {
+  box-shadow: 
+    0 12px 35px rgba(102, 126, 234, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-edit {
+  background: var(--edit-gradient);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(240, 147, 251, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-edit:hover {
+  box-shadow: 
+    0 12px 35px rgba(240, 147, 251, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-pdf {
+  background: var(--pdf-gradient);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+  
+}
+
+.btn-pdf:hover {
+  box-shadow: 
+    0 12px 35px rgba(102, 126, 234, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-csv {
+  background: var(--csv-gradient);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(79, 172, 254, 0.3),
+    var(--shadow-dark),
+    var(--shadow-light);
+    
+}
+
+.btn-csv:hover {
+  box-shadow: 
+    0 12px 35px rgba(79, 172, 254, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+ 
+  

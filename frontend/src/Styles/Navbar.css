@@ -1,0 +1,73 @@
+
+/* ===== NAVIGATION BAR ===== */
+
+.navbar {
+  /* Background with blur and border */
+  background: var(--bg-dark);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--radius-lg);
+  border-radius: var(--radius-2xl);
+  
+  /* Layout and spacing */
+  padding: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+
+  /* Positioning*/
+  margin-top: 20px;
+  top: var(--space-lg);
+  
+  
+  /* Visual effects */
+  box-shadow: 
+    var(--shadow-dark),
+    var(--shadow-light),
+    0 0 40px rgba(102, 126, 234, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInUp var(--animation-slow) ease-out
+}
+
+/* ===== NAVIGATION LINKS ===== */
+
+.nav-link {
+  /* Typography */
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  
+  /* Spacing and Layout*/
+  padding: 14px var(--space-lg);
+  border-radius: var(--radius-lg);
+  
+  /* Styling */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  /* Effects */
+  box-shadow: 
+    var(--shadow-dark),
+    var(--shadow-light);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  
+}
+
+/* Hover state */
+.nav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    var(--shadow-inset-dark),
+    var(--shadow-inset-light),
+    0 0 20px rgba(102, 126, 234, 0.3);
+  color: #a5b4fc;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+
+
