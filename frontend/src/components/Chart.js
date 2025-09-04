@@ -89,22 +89,13 @@ const Chart = ({
                     const shouldShow = selectedCategory.length === 0 || selectedCategory.includes(category);
                     if (!shouldShow) return null;
     
-                    const budgetObj = budgets.find(b => b.category === category);
-                    const budgetAmount = budgetObj ? Number(budgetObj.categoryLimit) : null;
+                    
                     const color = categoryColors[index % categoryColors.length];
     
                     return (
                       <React.Fragment key={category}>
                         <Bar dataKey={category} stackId="a" fill={color} name={category} />
-                        {budgetAmount !== null && (
-                          <ReferenceLine
-                            y={budgetAmount}
-                            label={{ value: `${category} Budget`, position: 'right' , fill:color}}
-                            stroke={color}
-                            strokeDasharray="3 3"
-                            
-                          />
-                        )}
+                        
                       </React.Fragment>
                     );
                   })}

@@ -51,6 +51,8 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
     }
   }, [editingExpense])
 
+
+
   const currentBudget = budgets.find(b => b.category === category)
   let budgetLeft = null
   if (currentBudget) {
@@ -64,6 +66,11 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
   const start = currentBudget?.startDate ? new Date(currentBudget.startDate) : null
   const end = currentBudget?.endDate ? new Date(currentBudget.endDate) : null
 
+
+  /**
+   * Display a message if a budget is applied to an expense based on if the expense is within the budget duration
+   */
+  
   let durationMessage = ""
   if (start && end && date) {
     const selectedDate = new Date(date)
@@ -115,7 +122,7 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
     const selectedBudget = budgets.find(b => b.category === category)
     const expenseAmount = parseFloat(amount)
     const selectedDate = new Date(date)
-
+    let isActive = false
     if (selectedBudget) {
       let isActive = true
 
@@ -151,7 +158,7 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
       category: category,
       description: description.trim(),
       date: date,
-      budgetId: selectedBudget?.id || null
+      budgetId: isActive ? selectedBudget?.id : null
     }
 
 
@@ -210,7 +217,7 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
   }
 
 
-  
+
 
   return (
 
