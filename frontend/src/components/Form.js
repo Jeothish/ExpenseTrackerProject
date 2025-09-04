@@ -54,9 +54,9 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
   const currentBudget = budgets.find(b => b.category === category)
   let budgetLeft = null
   if (currentBudget) {
-    const spent = expenses.filter(expense => expense.category === category).reduce((sum, expense) => sum + expense.amount, 0)
+    const spent = expenses.filter(expense => expense.category === category && expense.budgetId === currentBudget.id).reduce((sum, expense) => sum + expense.amount, 0)
 
-    const typedAmount = parseFloat(amount) || 0
+    const typedAmount = amount ? parseFloat(amount) : 0
     budgetLeft = currentBudget.categoryLimit - spent - typedAmount
   }
 
