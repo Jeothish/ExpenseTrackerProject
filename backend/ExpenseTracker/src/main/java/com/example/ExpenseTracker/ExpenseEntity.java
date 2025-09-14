@@ -3,6 +3,8 @@
 package com.example.ExpenseTracker;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,4 +35,13 @@ public class ExpenseEntity {
     @JsonBackReference //Avoids infinite loops in JSON serialization
     private BudgetEntity budget;
     
+    @Enumerated(EnumType.STRING)
+    private RecurrenceType recurrenceType = RecurrenceType.NONE;
+    
+    private int recurrenceInterval = 0;
+    private LocalDate nextRecurrenceDate;
+   
+
+
 }
+
