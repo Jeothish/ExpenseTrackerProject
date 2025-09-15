@@ -31,6 +31,7 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
   const { budgets, expenses } = useData()
 
   const categories = ["Housing", "Food", "Transportation", "Entertainment", "Healthcare", "Other"]
+  const recurringTypes = ["NONE","DAILY","WEEKLY","MONTHLY","YEARLY"]
 
 
   /**
@@ -300,6 +301,16 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
 
+        />
+      </div>
+
+      <div className="form-control">
+        <label>Recurring</label>
+        <input
+          type="text"
+          placeholder="Description of expense"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
 
