@@ -25,6 +25,7 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
   const [description, setDescription] = useState("")
   const [date, setDate] = useState("")
   const [budgetId, setBudgetId] = useState("")
+  const [recurringType, setRecurringType] = useState("")
 
   //Get budgets to modify them from the context file
 

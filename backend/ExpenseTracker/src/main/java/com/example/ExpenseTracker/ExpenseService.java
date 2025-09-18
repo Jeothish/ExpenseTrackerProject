@@ -5,6 +5,7 @@
  * 
  */
 package com.example.ExpenseTracker;
+
 import com.example.ExpenseTracker.BudgetEntity;
 import com.example.ExpenseTracker.ExpenseEntity;
 import com.example.ExpenseTracker.repository.ExpenseRepo;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Service
 public class ExpenseService {
-    private ExpenseRepo repository; //Define repository
+    private ExpenseRepo repository; // Define repository
     private BudgetRepo budgetRepository;
 
     public ExpenseService(ExpenseRepo repository, BudgetRepo budgetRepository) {
