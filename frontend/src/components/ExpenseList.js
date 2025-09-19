@@ -35,6 +35,7 @@ return (
             <th>Category</th>
             <th>Description</th>
             <th>Date</th>
+            <th>Recurring</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,8 @@ return (
                     <td>{expense.category}</td>
                     <td>{expense.description}</td>
                     <td>{new Date(expense.date).toLocaleDateString()}</td>
+                    <td>{expense.recurrenceType}</td>
+
                 </tr> 
             )                  
         )}

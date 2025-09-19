@@ -60,6 +60,13 @@ public class ExpenseService {
 
             expense.setBudget(budget);
         }
+        
+        if (expense.getRecurrenceType() != RecurrenceType.NONE && expense.getNextRecurrenceDate() == null) {
+        expense.setNextRecurrenceDate(
+            LocalDate.now().plusDays(expense.getRecurrenceInterval())
+        );
+    }
+
 
         
         return repository.save(expense);

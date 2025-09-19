@@ -307,13 +307,16 @@ const Form = ({ onExpenseAdded, onExpenseEdited, editingExpense }) => {
 
       <div className="form-control">
         <label>Recurring</label>
-        <input
-          type="text"
-          placeholder="Description of expense"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
+        <select
+          value={recurringType}
+          onChange={(e) => setRecurringType(e.target.value)}
+        >
+          <option value="">Select recurring type</option>
+          {recurringTypes.map(cat => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+        </div>
 
       <input
         type="submit"
