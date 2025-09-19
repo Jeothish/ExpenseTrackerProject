@@ -6,6 +6,7 @@ import ExpenseTracker from "./Pages/ExpenseTracker"
 import { DataProvider } from "./Context/DataContext"
 import Analysis from "./Pages/Analysis"
 import Budget from "./Pages/Budget"
+import AI from "./Pages/AI"
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/" element={<ExpenseTracker/>} />
       <Route path="/analysis" element={<Analysis/>} />
       <Route path="/budget" element={<Budget/>} />
+      <Route path="/AI" element={<AI/>} />
       
     </Routes>
     </DataProvider>    
