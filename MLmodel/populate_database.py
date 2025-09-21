@@ -30,9 +30,9 @@ cursor = database_connection.cursor()
 categories = ["Housing", "Food", "Transportation", "Entertainment", "Healthcare", "Other"]
 
 #Populate expenses with random values
-for i in range(50):
+for i in range(150):
     name = f"Fake Expense {i+1}"
-    amount = random.randint(10,200)
+    amount = random.randint(10,500)
     category = random.choice(categories)
     date = datetime.now() - timedelta(days=random.randint(0,365))
     recurrence_type = "NONE"

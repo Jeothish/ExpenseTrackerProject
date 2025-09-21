@@ -6,6 +6,7 @@ table {
   /* Layout */
   width: 100%;
   max-width: 1000px;
+  max-height: 500px;
   margin: var(--space-2xl) auto;
   border-spacing: 0 var(--space-md);
   
@@ -101,4 +102,8 @@ table td:first-child::before {
   border-top: 2px solid var(--pdf-gradient);
 }
 
+.scrollable{
+  max-height: 800px;
+  overflow-y: auto;
+}
 

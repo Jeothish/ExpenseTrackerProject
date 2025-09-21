@@ -179,6 +179,8 @@ body::before {
   gap: var(--space-2xl);
   margin-top: var(--space-lg);
   animation: slideInLeft var(--animation-slow) cubic-bezier(0.4, 0, 0.2, 1);
+  
+  
 }
 
 .form-and-list-container .form {
@@ -194,6 +196,8 @@ body::before {
   animation: slideInRight var(--animation-slow) cubic-bezier(0.4, 0, 0.2, 1);
   animation-delay: 0.4s;
   animation-fill-mode: both;
+  
+  
 }
 
 .table-and-button {
@@ -201,7 +205,8 @@ body::before {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: var(--space-lg)
+  gap: var(--space-lg);
+  
 }
 
 .buttons-row {
