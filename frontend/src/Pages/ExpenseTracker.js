@@ -296,11 +296,13 @@ const ExpenseTracker = () => {
             />
           )}
           <div className="table-and-button">
+            <div className="scrollable">
             <ExpenseList
               expenses={filteredExpenses}
               onDelete={deleteExpense}
               onEdit={handleEditClick}
             />
+            </div>
             
             <div style={{ position: "fixed", left: "-9999px", width: "800px", height: "400px" }}>
               <div ref={monthlyExpensesRef} style={{ width: "100%", height: "400px", backgroundColor: "white" }}>
