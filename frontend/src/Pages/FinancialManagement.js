@@ -31,10 +31,10 @@ const Budget = () => {
         }
     }
 
-    
 
-    
-    
+
+
+
 
     const categoryTotal = budgets.reduce((totals, budget) => {
         const totalSpent = expenses.filter(expense => expense.category === budget.category).reduce((sum, expense) => sum + expense.amount, 0)
@@ -97,6 +97,9 @@ const Budget = () => {
 
     const usedCategories = budgets.map(b => b.category)
     const availableCategories = categories.filter(c => !usedCategories.includes(c))
+    let progressIndicator = "progress-safe"
+                                    if (percentage >= 85) progressIndicator = "progress-danger"
+                                    else if (percentage >= 60) progressIndicator = "progress-warning"
 
     return (
         <>
@@ -117,9 +120,13 @@ const Budget = () => {
                                     const percentage = Math.min((spent / budget.categoryLimit) * 100, 100)
                                     const remaining = budget.categoryLimit - spent
 
+                                    let progressIndicator = "progress-safe"
+                                    if (percentage >= 85) progressIndicator = "progress-danger"
+                                    else if (percentage >= 60) progressIndicator = "progress-warning"
+
                                     return (
-                                        <div key={budget.id} className='budget-item'>
-                                            < div className='budget-details' >
+                                        <><div key={budget.id} className='budget-card'>
+                                            <div className='budget-details'>
                                                 <h3>{budget.category}</h3>
                                                 <p>{spent} of {budget.categoryLimit}</p>
                                             </div>
@@ -127,8 +134,8 @@ const Budget = () => {
 
                                             <div className="progress-container">
                                                 <div className='progress-bar'>
-                                                    <p>Remaining: ${remaining}</p>
-                                                    <p>Ends at: ${budget.endDate}</p>
+                                                    <p>{remaining > 0 ? `You have £${remaining}` : `You are ${Math.abs(remaining)}`}</p>
+                                                    <p>Ends at: {budget.endDate}</p>
                                                 </div>
 
 
@@ -138,10 +145,21 @@ const Budget = () => {
                                                 <button className='btn-edit' onClick={() => handleEditClick(budget)} title="Edit Budget" />
                                                 <button className='btn-delete' onClick={() => handleDeleteBudget(budget)} title="Delete Budget" />
                                             </div>
-                                        </div>
+                                        </div><div className='progress-container'>
+                                                <div className='progress-bar'>
+                                                    <div className={`progress-fill ${progressIndicator}`}
+                                                        style={{ width: `${Math.min(percentage, 100)}%` }}>
+                                                    </div>
+                                                </div>
+                                            </div></>
+                            
                                     )
                                 })}
                             </div>
+
+                            
+
+
 
 
 
