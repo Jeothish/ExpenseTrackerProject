@@ -70,7 +70,7 @@
 .btn-delete {
   background: var(--danger-gradient);
   color: white;
-  margin: var(--space-lg) auto;
+  
   box-shadow: 
     0 8px 25px rgba(250, 112, 154, 0.3),
     var(--shadow-dark),
@@ -149,5 +149,36 @@
     var(--shadow-dark),
     var(--shadow-light);
 }
+
+.btn-csv:hover {
+  box-shadow: 
+    0 12px 35px rgba(79, 172, 254, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+.btn-csv:hover {
+  box-shadow: 
+    0 12px 35px rgba(79, 172, 254, 0.4),
+    var(--shadow-dark),
+    var(--shadow-light);
+}
+
+
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    
+}
+
  
   

@@ -70,6 +70,13 @@
     inset 0 -3px 12px rgba(0, 0, 0, 0.15);
 }
 
+.subheader {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: var(--space-sm);
+}
+
 
 /* ===== ANIMATIONS ===== */
 

@@ -3,6 +3,10 @@
  * Connect with DataContext to update the global state
  */
 
+
+import "../Styles/index.css"
+import "../Styles/button.css"
+import "../Styles/budget.css"
 import Header from '../components/Header'
 import { useState, useEffect } from 'react'
 import Button from '../components/Button'
@@ -30,9 +34,6 @@ const Budget = () => {
             setEditingBudget(null)
         }
     }
-
-
-
 
 
 
@@ -94,19 +95,30 @@ const Budget = () => {
         setFormState(true)
     }
 
+    const getCategoryIcon = (category) => {
+        const icons = {
+            "Housing": "🏠",
+            "Food": "🍔",
+            "Transportation": "🚗",
+            "Entertainment": "🎮",
+            "Healthcare": "💊",
+            "Other": "💼"
+        }
+        return icons[category] || "💼"
+    }
+
 
     const usedCategories = budgets.map(b => b.category)
     const availableCategories = categories.filter(c => !usedCategories.includes(c))
-    let progressIndicator = "progress-safe"
-                                    if (percentage >= 85) progressIndicator = "progress-danger"
-                                    else if (percentage >= 60) progressIndicator = "progress-warning"
+
 
     return (
         <>
 
             <Header title="Financial Management" />
-            <div className='chart-controls'>
-                <div className="section-card">
+            
+            
+                
                     <div className="form-and-list-container">
 
                         {formState && (
@@ -125,43 +137,44 @@ const Budget = () => {
                                     else if (percentage >= 60) progressIndicator = "progress-warning"
 
                                     return (
-                                        <><div key={budget.id} className='budget-card'>
-                                            <div className='budget-details'>
-                                                <h3>{budget.category}</h3>
-                                                <p>{spent} of {budget.categoryLimit}</p>
+                                        <div key={budget.id} className='budget-card'>
+                                            <div className='budget-card-header'>
+                                                <div className='budget-icon'>
+                                                    {getCategoryIcon(budget.category)}
+                                                </div>
+                                                <div className='budget-details'>
+                                                    <h3>{budget.category}</h3>
+                                                    <p>€{spent} of €{budget.categoryLimit} spent</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='budget-actions'>
+                                                <Button className='btn-icon btn-edit' onClick={() => handleEditClick(budget)} text="✏️" />
+                                                <Button className='btn-icon btn-delete' onClick={() => handleDeleteBudget(budget)} text="🗑️" />
                                             </div>
 
 
                                             <div className="progress-container">
                                                 <div className='progress-bar'>
-                                                    <p>{remaining > 0 ? `You have £${remaining}` : `You are ${Math.abs(remaining)}`}</p>
-                                                    <p>Ends at: {budget.endDate}</p>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div className='budget-actions'>
-                                                <button className='btn-edit' onClick={() => handleEditClick(budget)} title="Edit Budget" />
-                                                <button className='btn-delete' onClick={() => handleDeleteBudget(budget)} title="Delete Budget" />
-                                            </div>
-                                        </div><div className='progress-container'>
-                                                <div className='progress-bar'>
                                                     <div className={`progress-fill ${progressIndicator}`}
                                                         style={{ width: `${Math.min(percentage, 100)}%` }}>
                                                     </div>
                                                 </div>
-                                            </div></>
-                            
+
+                                                <div className='budget-status'>
+                                                    <span className='status-text'>
+                                                        {remaining > 0 ? `✅You have €${remaining} remaining` : `⚠️You are €${Math.abs(remaining)} over the budget`}
+
+                                                    </span>
+
+                                                    <span className="status-percentage">{Math.round(percentage)}%</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     )
                                 })}
                             </div>
-
-                            
-
-
-
-
 
 
                             <Button
@@ -171,8 +184,8 @@ const Budget = () => {
                             />
                         </div>
                     </div >
-                </div>
-            </div>
+                
+            
 
 
 
