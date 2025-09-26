@@ -7,6 +7,7 @@
 import "../Styles/index.css"
 import "../Styles/button.css"
 import "../Styles/budget.css"
+//import "../Styles/financial-management.css"
 import Header from '../components/Header'
 import { useState, useEffect,useRef } from 'react'
 import Button from '../components/Button'
@@ -439,7 +440,7 @@ const FinancialManagement = () => {
                 </select>
 
 
-                {/*Month filter*/}
+                
 
                 <label>Select month:</label>
                 <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
