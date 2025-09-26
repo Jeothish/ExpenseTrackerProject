@@ -24,6 +24,7 @@ const ExpenseList = ({expenses, onDelete , onEdit}) => {
     },0)
   
 return (
+    <div className="scrollable">
     
     <table>
         <thead>
@@ -58,6 +59,7 @@ return (
         </tr>
         </tbody>
         </table>  
+        </div>
         
   )
 }
