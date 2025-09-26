@@ -95,6 +95,8 @@ for ax,category in zip(axes,tqdm(categories,desc="Training model for spending pa
     ax.set(xlabel="Month", ylabel="Spending (€)")
     ax.legend()
     ax.grid(True)
+    
+
 
 plt.tight_layout()
 plt.show()

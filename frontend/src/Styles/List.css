@@ -102,8 +102,11 @@ table td:first-child::before {
   border-top: 2px solid var(--pdf-gradient);
 }
 
-.scrollable{
+.scrollable {
+
   max-height: 800px;
   overflow-y: auto;
 }
+
+
 

@@ -17,7 +17,8 @@ const Button = ({className,text,onClick}) => {
   return (
     <button 
     onClick={onClick}  className={`btn ${className}`}>
-        {text}
+      
+      {text}
     </button>
   )
 }

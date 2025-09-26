@@ -213,6 +213,8 @@ body::before {
   display: flex;
   gap: var(--space-2xl);
   align-items: center;
+  margin-left: 425px;
+  margin-bottom: 50px;
 }
 
 .section-card {
