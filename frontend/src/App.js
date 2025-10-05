@@ -8,6 +8,7 @@ import Analysis from "./Pages/Analysis"
 import Budget from "./Pages/Budget"
 import AI from "./Pages/AI"
 import FinancialManagement from "./Pages/FinancialManagement"
+import Dashboard from "./Pages/Dashboard"
 const App = () => {
 
   return (
@@ -16,6 +17,7 @@ const App = () => {
     <Navbar/>
     <Routes>
       <Route path="/" element={<ExpenseTracker/>} />
+      <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/analysis" element={<Analysis/>} />
       <Route path="/budget" element={<Budget/>} />
       <Route path="/AI" element={<AI/>} />
