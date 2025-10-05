@@ -1,0 +1,26 @@
+.summary-card {
+    background: var(--bg-dark);
+    box-shadow: var(--shadow-dark);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    display: flex;
+    max-width: 350px;
+    margin-left: 50px;
+}
+
+.summary-card h1{
+    font-size: 1.5rem ;
+}
+
+
+.summary-text{
+    display: block;
+    font-size: 1.1rem;
+}
+
+.summary-container{
+    display:flex;
+    gap: 20px;
+}
