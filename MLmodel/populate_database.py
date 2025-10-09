@@ -17,11 +17,11 @@ print("Script is running!")
 
 #Connects to PostgreSQL database
 database_connection = psycopg2.connect(
-    dbname="${DB_NAME}",
-    user="${DB_USER}",
-    password="REMOVED_SECRET",
-    host="localhost",
-    port="5432",
+    dbname="your_details",
+    user="your_details",
+    password="your_details",
+    host="your_details",
+    port="your_details",
 )
 
 #Creates a cursor object that points to the database and allows SQL commands to be executed
