@@ -6,10 +6,9 @@
 
 import "../Styles/index.css"
 import "../Styles/button.css"
-import "../Styles/budget.css"
-//import "../Styles/financial-management.css"
+import "../Styles/FinancialManagement.css"
 import Header from '../components/Header'
-import { useState, useEffect,useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Button from '../components/Button'
 import ExpenseList from "../components/ExpenseList"
 import Form from '../components/Form'
@@ -39,12 +38,12 @@ const FinancialManagement = () => {
     const [editingExpense, setEditingExpense] = useState(null)
     const [category, setCategory] = useState("");
 
-     //Refs for capturing chart elements
-      const monthlyExpensesRef = useRef(null)
-      const monthlyCountRef = useRef(null)
-      const categoryMonthlyRef = useRef(null)
-      const categoryTotalRef = useRef(null)
-    
+    //Refs for capturing chart elements
+    const monthlyExpensesRef = useRef(null)
+    const monthlyCountRef = useRef(null)
+    const categoryMonthlyRef = useRef(null)
+    const categoryTotalRef = useRef(null)
+
 
     const categories = ["Housing", "Food", "Transportation", "Entertainment", "Healthcare", "Other"]
 
@@ -360,133 +359,156 @@ const FinancialManagement = () => {
 
             <Header title="Financial Management" />
 
-            <div className="budget-button">
-                <Button
-                    text={formState ? "Close form" : "+ Add budget"}
-                    onClick={toggleForm}
-                    className={formState ? "btn-delete" : "btn-add"}
-                />
-            </div>
-
-
-
             <div className="form-and-list-container">
-
 
                 {formState && (
                     <BudgetForm onBudgetAdded={handleAddBudget} onBudgetEdited={handleEditBudget} editingBudget={editingBudget} existingCategories={availableBudgetCategories} />
                 )}
-
-                <div className="table-and-button">
-                    <div className='budget-grid'>
-                        {budgets.map(budget => {
-                            const spent = categoryTotal[budget.category] || 0
-                            const percentage = Math.min((spent / budget.categoryLimit) * 100, 100)
-                            const remaining = budget.categoryLimit - spent
-
-                            let progressIndicator = "progress-safe"
-                            if (percentage >= 85) progressIndicator = "progress-danger"
-                            else if (percentage >= 60) progressIndicator = "progress-warning"
-
-                            return (
-                                <div key={budget.id} className='budget-card'>
-                                    <div className='budget-card-header'>
-                                        <div className='budget-icon'>
-                                            {getCategoryIcon(budget.category)}
-                                        </div>
-                                        <div className='budget-details'>
-                                            <h3>{budget.category}</h3>
-                                            <p>€{spent} of €{budget.categoryLimit} spent</p>
-                                        </div>
-                                    </div>
-
-                                    <div className='budget-actions'>
-                                        <Button className='btn-icon btn-edit' onClick={() => handleEditClickBudget(budget)} text="✏️" />
-                                        <Button className='btn-icon btn-delete' onClick={() => handleDeleteBudget(budget)} text="🗑️" />
-                                    </div>
+                <div className="budget-section">
+                    <div className="budget-header">
+                        <h2>🎯Budget Tracking</h2>
+                        <Button
+                            text={formState ? "Close form" : "+ Add budget"}
+                            onClick={toggleForm}
+                            className={formState ? "btn-delete" : "btn-add"}
+                        />
 
 
-                                    <div className="progress-container">
-                                        <div className='progress-bar'>
-                                            <div className={`progress-fill ${progressIndicator}`}
-                                                style={{ width: `${Math.min(percentage, 100)}%` }}>
+                    </div>
+                    <div className="table-and-button">
+                        <div className='budget-grid'>
+                            {budgets.map(budget => {
+                                const spent = categoryTotal[budget.category] || 0
+                                const percentage = Math.min((spent / budget.categoryLimit) * 100, 100)
+                                const remaining = budget.categoryLimit - spent
+
+                                let progressIndicator = "progress-safe"
+                                if (percentage >= 85) progressIndicator = "progress-danger"
+                                else if (percentage >= 60) progressIndicator = "progress-warning"
+
+                                return (
+                                    <div key={budget.id} className='budget-card'>
+                                        <div className='budget-card-header'>
+                                            <div className='budget-icon'>
+                                                {getCategoryIcon(budget.category)}
+                                            </div>
+                                            <div className='budget-details'>
+                                                <h3>{budget.category}</h3>
+                                                <p>€{spent} of €{budget.categoryLimit} spent</p>
                                             </div>
                                         </div>
 
-                                        <div className='budget-status'>
-                                            <span className='status-text'>
-                                                {remaining > 0 ? `✅You have €${remaining} remaining` : `⚠️You are €${Math.abs(remaining)} over the budget`}
+                                        <div className='budget-actions'>
+                                            <Button className='btn-icon btn-edit' onClick={() => handleEditClickBudget(budget)} text="✏️" />
+                                            <Button className='btn-icon btn-delete' onClick={() => handleDeleteBudget(budget)} text="🗑️" />
+                                        </div>
 
-                                            </span>
 
-                                            <span className="status-percentage">{Math.round(percentage)}%</span>
+                                        <div className="progress-container">
+                                            <div className='progress-bar'>
+                                                <div className={`progress-fill ${progressIndicator}`}
+                                                    style={{ width: `${Math.min(percentage, 100)}%` }}>
+                                                </div>
+                                            </div>
 
+                                            <div className='budget-status'>
+                                                <span className='status-text'>
+                                                    {remaining > 0 ? `✅You have €${remaining} remaining` : `⚠️You are €${Math.abs(remaining)} over the budget`}
+
+                                                </span>
+
+                                                <span className="status-percentage">{Math.round(percentage)}%</span>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
+                        </div>
+
+                    </div>
+                </div >
+            </div>
+
+
+            <div className="expenses-section">
+                <div className="expenses-header">
+                    <h2 className="section-title"> 💳Expense Tracking</h2>
+                    <Button
+                        text={ExpenseFormState ? "Close form" : "+ Add Expense"}
+                        onClick={toggleExpenseForm}
+                        className={ExpenseFormState ? "btn-delete" : "btn-add"}
+                    />
+                </div>
+
+
+                <div className="expense-filters">
+                    <div className="filter-group">
+                        <label className="filter-label">Year</label>
+                        <select className="filter-input" value={year} onChange={(e) => setYear(Number(e.target.value))}>
+                            {availableYears.map(y => (
+                                <option key={y} value={y}>{y}</option>
+                            ))}
+                        </select>
                     </div>
 
-                </div>
-            </div >
-            <div className="chart-controls">
+                    <div className="filter-group">
+                        <label className="filter-label">Month</label>
+                        <select className="filter-input" value={month} onChange={(e) => setMonth(Number(e.target.value))}>
+                            <option value="">All</option>
+                            {availableMonths.map(m => (
+                                <option key={m} value={m}>{new Date(0, m).toLocaleString("default", { month: "long" })}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                <label>Select year:</label>
-                <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
-                    {availableYears.map(y => (
-                        <option key={y} value={y}>{y}</option>
-                    ))}
-                </select>
+                    <div className="filter-group">
+                        <label className="filter-label">Category</label>
+                        <select className="filter-input" value={category} onChange={(e) => setCategory(e.target.value)}>
+                            <option value="">All</option>
+                            {availableCategories.map(c => (
+                                <option key={c} value={c}>{c}</option>
+                            ))}
+                        </select>
+                    </div>
 
-
-                
-
-                <label>Select month:</label>
-                <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
-                    <option value="">All</option>
-                    {availableMonths.map(m => (
-                        <option key={m} value={m}> {new Date(0, m).toLocaleString("default", { month: "long" })}</option>
-                    ))}
-                </select>
-
-                <label>Select Category:</label>
-                <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                    <option value="">All</option>
-                    {availableCategories.map(c => (
-                        <option key={c} value={c}>{c}</option>
-                    ))}
-                </select>
-
-
-
-                <div className="buttons-row">
-                    <Button
-                        colour="green"
-                        text={ExpenseFormState ? "Close form" : "Add expense"}
-                        onClick={toggleExpenseForm}
-                        className={formState ? "btn-delete" : "btn-add"}
-                    />
-
-                    <Button className="btn-pdf" text="Download report as PDF" onClick={exportPDF} />
-                    <Button className="btn-csv" text="Download report as CSV" onClick={exportCSV} />
+                    <div className="filter-group">
+                        <label className="filter-label">Total</label>
+                        <div className="expense-total-display">€{expenseTotal.toFixed(2)}</div>
+                    </div>
                 </div>
 
-                <ExpenseList
-                    expenses={filteredExpenses}
-                    onDelete={deleteExpense}
-                    onEdit={handleEditClickExpense}
-                />
 
-                {ExpenseFormState && (
-                    <Form
-                        onExpenseAdded={handleAddExpense}
-                        onExpenseEdited={handleEditExpense}
-                        editingExpense={editingExpense}
-                    />
-                )}
+                <div className="export-buttons">
+                    <Button className="btn-pdf" text="📊 Export PDF" onClick={exportPDF} />
+                    <Button className="btn-csv" text="📋 Export CSV" onClick={exportCSV} />
+                </div>
 
+
+                <div className="expense-content">
+                    {ExpenseFormState && (
+                        <div className="expense-form-wrapper">
+                            <Form
+                                onExpenseAdded={handleAddExpense}
+                                onExpenseEdited={handleEditExpense}
+                                editingExpense={editingExpense}
+                            />
+                        </div>
+                    )}
+
+                    <div className="expenses-table-wrapper">
+                        <ExpenseList
+                            expenses={filteredExpenses}
+                            onDelete={deleteExpense}
+                            onEdit={handleEditClickExpense}
+                            showActions={true}
+                            showTotal={true}
+                        />
+                    </div>
+                </div>
             </div>
+
+
 
             <div style={{ position: "fixed", left: "-9999px", width: "800px", height: "400px" }}>
                 <div ref={monthlyExpensesRef} style={{ width: "100%", height: "400px", backgroundColor: "white" }}>
