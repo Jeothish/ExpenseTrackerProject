@@ -1,5 +1,5 @@
 import React, {createContext,useContext,useState,useEffect} from "react"
-import { expenseAPI, budgetAPI } from "../Services/api"
+import { expenseAPI, budgetAPI, pythonAPI } from "../Services/api"
 import Swal from "sweetalert2"
 
 /**
@@ -27,11 +27,17 @@ export const DataProvider = ({children}) => {
     // State management
     const [expenses , setExpenses] = useState([])
     const [budgets , setBudgets] = useState([])
+    const [insights,setInsights] = useState([])
+    const [nextMonthTotal,setNextMonthTotal] = useState(null)
+    const [nextMonthTotalByCategory,setNextMonthTotalByCategory] = useState([])
 
     // Loads expenses and budgets on render
     useEffect(() => {
         loadExpenses()
         loadBudgets()
+        loadInsights()
+        loadNextMonthTotal()
+        loadNextMonthTotalByCategory()
     },[])
 
     /**
@@ -63,6 +69,36 @@ export const DataProvider = ({children}) => {
         }
         catch(error){
             console.error("Failed to load budgets")
+        }
+    }
+
+    const loadInsights = async() => {
+        try{
+            const data = await pythonAPI.getAll()
+            setInsights(data)
+        }
+        catch(error){
+            console.error("Failed to load insights")
+        }
+    }
+
+    const loadNextMonthTotal = async() => {
+        try{
+            const data = await pythonAPI.getNextMonthTotal()
+            setNextMonthTotal(data)
+        }
+        catch(error){
+            console.error("Failed to load next months total")
+        }
+    }
+
+    const loadNextMonthTotalByCategory = async() => {
+        try{
+            const data = await pythonAPI.getNextMonthCategory()
+            setNextMonthTotalByCategory(data)
+        }
+        catch(error){
+            console.error("Failed to load next months total by category")
         }
     }
 
@@ -161,9 +197,12 @@ export const DataProvider = ({children}) => {
         
         expenses,
         budgets,
+        insights,
+        nextMonthTotal,
+        nextMonthTotalByCategory,
         availableCategories,
         availableYears,
-
+        
         addExpense,
         updateExpense,
         deleteExpense,
@@ -173,6 +212,9 @@ export const DataProvider = ({children}) => {
 
         loadExpenses,
         loadBudgets,
+        loadInsights,
+        loadNextMonthTotal,
+        loadNextMonthTotalByCategory,
     }
 
     return(
