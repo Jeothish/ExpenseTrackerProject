@@ -42,8 +42,8 @@ return (
         <tbody>
             {sortedExpenses.map((expense) => (
                 <tr key={expense.id}>
-                    <td><Button text="Edit " className="btn-edit" onClick={() => onEdit(expense)} /></td>
-                    <td><Button text="Delete" className="btn-delete" onClick={() => onDelete(expense.id)} /></td>
+                    <td><Button text="✏️ " className="btn-edit" onClick={() => onEdit(expense)} /></td>
+                    <td><Button text="🗑️" className="btn-delete" onClick={() => onDelete(expense.id)} /></td>
                     <td>{expense.name}</td>
                     <td>€{expense.amount}</td>
                     <td>{expense.category}</td>
