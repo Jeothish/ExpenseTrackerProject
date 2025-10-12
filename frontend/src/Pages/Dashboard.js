@@ -1,5 +1,5 @@
 import "../Styles/index.css"
-import "../Styles/budget.css"
+import "../Styles/FinancialManagement.css"
 import Header from "../components/Header"
 import { useState, useEffect, useRef } from 'react'
 import { useData } from '../Context/DataContext'
@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const recentExpenses = [...expenses]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 5)
+    .slice(0, 10)
 
 
   const getMonthlyExpenses = (month, year) => {
@@ -91,6 +91,7 @@ const Dashboard = () => {
             <div className="summary-text">
               <h1>${remaining}</h1>
               <p>Budget Remaining</p>
+              <div className="feedback-text"></div>
             </div>
           </div>
 
