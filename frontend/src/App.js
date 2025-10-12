@@ -16,10 +16,8 @@ const App = () => {
     <DataProvider>
     <Navbar/>
     <Routes>
-      <Route path="/" element={<ExpenseTracker/>} />
-      <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/" element={<Dashboard/>} />
       <Route path="/analysis" element={<Analysis/>} />
-      <Route path="/budget" element={<Budget/>} />
       <Route path="/AI" element={<AI/>} />
       <Route path="/finance" element={<FinancialManagement/>} />
       
