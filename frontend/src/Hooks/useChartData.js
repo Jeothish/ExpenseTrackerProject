@@ -11,44 +11,50 @@ import { useData } from '../Context/DataContext';
  * @returns {Object} Chart state , utility and  processeddata functions
  */
 export const useChartData = (initialYear = new Date().getFullYear()) => {
-  
+
   //State management
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedCategory, setSelectedCategory] = useState([]);
-  
+
   //Get expenses and budgets to modify them from the context file
-  const {expenses,budgets,availableYears,availableCategories} = useData()
+  const { expenses, budgets, availableYears, availableCategories, nextMonthTotal, nextMonthTotalByCategory } = useData()
 
   const chartTypes = [
     { value: "monthly-expenses", label: "Monthly Expense Amounts" },
     { value: "monthly-count", label: "Number of Expenses per Month" },
     { value: "category-monthly", label: "Category Breakdown by Month" },
     { value: "category-total", label: "Total by Category" }
+
   ];
+
+  const forecastChartTypes = [
+    { value: "monthly-total-forecast", label: "Monthly Expense Amount with Forecast" },
+    { value: "category-monthly-total-forecast", label: "Monthly Expense Amount with Forecast Per Category" }
+  ]
 
   const categoryColors = [
     '#3498db', '#e74c3c', '#2ecc71', '#f39c12',
     '#9b59b6', '#1abc9c', '#e67e22', '#34495e'
   ];
-  
+
   //Filter expenses by selected year
-  const yearExpenses = useMemo(() => expenses.filter(expense => new Date(expense.date).getFullYear() === selectedYear),[expenses,selectedYear])
+  const yearExpenses = useMemo(() => expenses.filter(expense => new Date(expense.date).getFullYear() === selectedYear), [expenses, selectedYear])
 
   /**
    * Toggles a category in the selectedCategory state
    * @param {string} category - The category name to toggle
    */
-  
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(prev => prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]);
   }
-  
+
   /**
    * Processes expenses into monthly totals
    * @param {Array<Object>} yearExpenses - Expenses filtered by selected year
    * @returns {Array<Object>} Monthly totals per month
    */
-  
+
   const processMonthlyExpenses = (yearExpenses) => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthlyTotals = monthNames.map(month => ({ month, total: 0 }));
@@ -74,6 +80,57 @@ export const useChartData = (initialYear = new Date().getFullYear()) => {
     });
     return monthlyCounts;
   }
+
+  const processMonthlyExpensesWithForecast = (yearExpenses, nextMonthTotal = null) => {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthlyTotals = monthNames.map(month => ({ month, total: 0, isForecast: false }));
+
+    yearExpenses.forEach(exp => {
+      const month = new Date(exp.date).getMonth();
+      monthlyTotals[month].total += Number(exp.amount);
+    });
+
+    if (nextMonthTotal != null) {
+      const nextMonthIndex = (new Date().getMonth() + 1) % 12
+
+      monthlyTotals[nextMonthIndex].total = nextMonthTotal
+      monthlyTotals[nextMonthIndex].isForecast = true
+    }
+    return monthlyTotals;
+
+  }
+
+  const processCategoriesForecast = (yearExpenses, nextMonthTotalByCategory = []) => {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const filteredExpenses = selectedCategory.length > 0 ? yearExpenses.filter(exp => selectedCategory.includes(exp.category)) : yearExpenses;
+
+    const monthlyData = monthNames.map(month => {
+      const monthObj = { month };
+      availableCategories.forEach(cat => monthObj[cat] = 0);
+      return monthObj;
+    });
+
+    filteredExpenses.forEach(exp => {
+      const month = new Date(exp.date).getMonth();
+      if (exp.category && monthlyData[month]) {
+        monthlyData[month][exp.category] += Number(exp.amount);
+      }
+    });
+
+    const nextMonthIndex = (new Date().getMonth() + 1) % 12;
+    Object.entries(nextMonthTotalByCategory).forEach(([category, forecastValue]) => {
+      if (monthlyData[nextMonthIndex][category] !== undefined) {
+        monthlyData[nextMonthIndex][category] = Number(forecastValue)
+      }
+    })
+
+    return monthlyData
+
+
+  }
+
+
+
 
   /**
    * Process expenses into category totals per month
@@ -121,26 +178,35 @@ export const useChartData = (initialYear = new Date().getFullYear()) => {
    * @param {string} chartType - The type of chart to generate data for
    * @returns {Array<Object>} Processed chart data
    */
-  
+
   const getChartData = (chartType) => {
-    
+
     switch (chartType) {
       case "monthly-expenses":
         return processMonthlyExpenses(yearExpenses)
-        
+
+      case "category-monthly-total-forecast":
+        return processCategoriesForecast(yearExpenses, nextMonthTotalByCategory)
+
+      case "monthly-total-forecast":
+        return processMonthlyExpensesWithForecast(yearExpenses, nextMonthTotal)
+
       case "monthly-count":
         return processMonthlyCount(yearExpenses)
-        
+
       case "category-monthly":
         return processCategoryMonthly(yearExpenses)
-        
+
       case "category-total":
         return processCategoryTotal(yearExpenses)
-       
+
+
+
       default:
         return [];
     }
   }
+
 
   return {
     selectedYear,
@@ -153,19 +219,23 @@ export const useChartData = (initialYear = new Date().getFullYear()) => {
     availableCategories,
     budgets,
 
-    monthlyExpensesData :processMonthlyExpenses,
+    monthlyExpensesData: processMonthlyExpenses,
     monthlyCountData: processMonthlyCount,
-    categoryMonthlyData:  processCategoryMonthly,
+    categoryMonthlyData: processCategoryMonthly,
     categoryTotalData: processCategoryTotal,
+    monthlyExpensesForecastData: processMonthlyExpensesWithForecast,
+    categoryMonthlyForecastData: processCategoriesForecast,
+
 
     chartTypes,
+    forecastChartTypes,
     categoryColors,
 
     handleCategoryChange,
     getChartData,
-  
+
   }
 }
-  
 
-  
+
+
