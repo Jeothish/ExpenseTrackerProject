@@ -2,6 +2,7 @@
 import Swal
  from "sweetalert2"
 const API_BASE_URL = "http://localhost:8080"
+const API_FLASK_URL = "http://127.0.0.1:5000"
 
 /**
  * API service for managing expenses
@@ -291,4 +292,51 @@ export const budgetAPI = {
         }
     },
 }
+
+
+export const pythonAPI = {
+    getAll: async() => {
+        try{
+            const response = await fetch(`${API_FLASK_URL}/insights`)
+            if(response.ok){
+                return await response.json()
+            }
+            throw new Error("Server error fetching insights")
+        }
+        catch(error){
+            console.error("Network error fetching insights:",error)
+            throw error
+        }
+    },
+
+    getNextMonthTotal: async() => {
+        try{
+            const response = await fetch(`${API_FLASK_URL}/spending/total`)
+            if(response.ok){
+                return await response.json()
+            }
+            throw new Error("Server error fetching next months total")
+        }
+        catch(error){
+            console.error("Network error fetching next months total:",error)
+            throw error
+        }
+    },
+    
+    getNextMonthCategory: async() => {
+        try{
+            const response = await fetch(`${API_FLASK_URL}/spending/categories`)
+            if(response.ok){
+                return await response.json()
+            }
+            throw new Error("Server error fetching next months total by category")
+        }
+        catch(error){
+            console.error("Network error fetching next months total by category:",error)
+            throw error
+        }
+    }
+}
+
+
 
