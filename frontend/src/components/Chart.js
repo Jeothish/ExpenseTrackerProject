@@ -66,8 +66,13 @@ const Chart = ({
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" label={{ value: "Month", position: "insideBottom", offset: -5, dy: 15, style: { fontWeight: "bold" } }} />
               <YAxis domain={[0, maxDataValueTotal]} label={{ value: "Amount (€)", position: "insideLeft", offset: -10, angle: -90, dy: 30, style: { fontWeight: "bold" } }} />
-              <Tooltip formatter={value => [`£${value.toFixed(2)}`, "Amount"]} />
+              <Tooltip formatter={(value) => {
+                const num = parseFloat(value);
+                if(isNaN(num)) return ["0.00","Amount"]
+                return [`${num.toFixed(2)}`,"Amount"]
+              }} />
               <Line type="monotone" dataKey="total" stroke="#8884d8" />
+              
             </LineChart>
           </ResponsiveContainer>
 
@@ -130,7 +135,11 @@ const Chart = ({
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" label={{ value: "Month", position: "insideBottom", offset: -5, dy: 15, style: { fontWeight: "bold" } }} />
               <YAxis domain={[0, maxDataValueTotalCategory]} label={{ value: "Amount (€)", position: "insideLeft", offset: -10, angle: -90, dy: 30, style: { fontWeight: "bold" } }} />
-              <Tooltip formatter={(value, name) => [`£${value.toFixed(2)}`, name]} />
+              <Tooltip formatter={(value) => {
+                const num = parseFloat(value);
+                if(isNaN(num)) return ["0.00","Amount"]
+                return [`${num.toFixed(2)}`,"Amount"]
+              }} />
               <Legend verticalAlign="top" />
 
               {availableCategories.map((category, index) => {
