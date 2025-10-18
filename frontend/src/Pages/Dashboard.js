@@ -4,7 +4,6 @@ import Header from "../components/Header"
 import { useState, useEffect, useRef } from 'react'
 import { useData } from '../Context/DataContext'
 import "../Styles/dashboard.css"
-import ExpenseList from "../components/ExpenseList"
 const Dashboard = () => {
 
   const { budgets, expenses, availableYears } = useData()
@@ -67,7 +66,7 @@ const Dashboard = () => {
         <div className="summary-container">
           <div className="summary-card">
             <div className="summary-text">
-              <h1>${thisMonthTotal}</h1>
+              <h1>${thisMonthTotal.toFixed(2)}</h1>
               <p>Total Expenses This Month</p>
               <div className="feedback-text"><p style={{ display: "block", color: difference < 0 ? "#d61414ff" : "#14cb51ff" }}>{difference < 0 ? `📈  +${difference}%  from last month` : `📉  -${difference}%  from last month`}</p></div>
             </div>
@@ -75,7 +74,7 @@ const Dashboard = () => {
 
           <div className="summary-card">
             <div className="summary-text">
-              <h1>${avgDailyMonth}</h1>
+              <h1>${avgDailyMonth.toFixed(2)}</h1>
               <p>Average Daily Spending</p>
             </div>
           </div>
