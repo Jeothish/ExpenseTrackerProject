@@ -3,6 +3,7 @@ import Header from "../components/Header"
 import "../Styles/index.css"
 import "../Styles/ai.css"
 import "../Styles/Charts.css";
+import "../Styles/FinancialManagement.css"
 import Chart from '../components/Chart';
 import { useChartData } from '../Hooks/useChartData';
 import { useState, useEffect, } from 'react'
@@ -13,7 +14,7 @@ import { useData } from '../Context/DataContext'
 
 
 const AI = () => {
-  const { insights } = useData()
+  const { insights, budgets, expenses } = useData()
   const [forcastChartType, setForecastChartType] = useState("monthly-total-forecast");
 
   const {
@@ -26,6 +27,24 @@ const AI = () => {
   } = useChartData()
 
   const currentChartData = getChartData(forcastChartType)
+
+  const expenseTotal = expenses.reduce((sum, exp) => {
+    return sum + exp.amount;
+  }, 0)
+
+  const budgetTotal = budgets.reduce((sum, bud) => {
+    return sum + bud.categoryLimit;
+  }, 0)
+
+  const budgetEfficiency = Math.min((budgetTotal / expenseTotal) * 100, 100)
+
+  let progressIndicator = "progress-safe"
+  if (budgetEfficiency >= 85) progressIndicator = "progress-danger"
+  else if (budgetEfficiency >= 60) progressIndicator = "progress-warning"
+
+
+
+
 
 
 
@@ -48,45 +67,62 @@ const AI = () => {
 
         <div className="trend-section">
 
+
           <div className="title-header"><h1>📈 Trend Analysis</h1></div>
 
+
+
+          <label htmlFor='chart-type'>Chart Type:</label>
+          <select id="chart-type" value={forcastChartType} onChange={(e) => setForecastChartType(e.target.value)}>
+            {forecastChartTypes.map(type => (
+              <option key={type.value} value={type.value}>{type.label}</option>
+            ))}
+          </select>
+
+          {forcastChartType === "category-monthly-total-forecast" && (
+            <div className="chart-controls">
+              <label>Categories (select multiple):</label>
+              <div>
+                {availableCategories.map(category => (
+                  <label key={category} className='checkbox-label'>
+                    <input type="checkbox" checked={selectedCategory.includes(category)} onChange={() => handleCategoryChange(category)} />
+                    {category}
+                  </label>
+
+                ))}
+
+              </div>
+            </div>
+
+          )}
+
+
+
           <div className="chart-section">
-            <label htmlFor='chart-type'>Chart Type:</label>
-            <select id="chart-type" value={forcastChartType} onChange={(e) => setForecastChartType(e.target.value)}>
-              {forecastChartTypes.map(type => (
-                <option key={type.value} value={type.value}>{type.label}</option>
-              ))}
-            </select>
+            <h2>{forecastChartTypes.find(type => type.value === forcastChartType)?.label}</h2>
+            <Chart
+              chartType={forcastChartType}
+              data={currentChartData}
+              availableCategories={availableCategories}
+              selectedCategory={selectedCategory}
+              categoryColors={categoryColors}
+              height={400} />
 
-            {forcastChartType === "category-monthly-total-forecast" && (
-                <div>
-                  <label>Categories (select multiple):</label>
-                  <div>
-                    {availableCategories.map(category => (
-                      <label key={category} className='checkbox-label'>
-                        <input type="checkbox" checked={selectedCategory.includes(category)} onChange={() => handleCategoryChange(category)} />
-                        {category}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              )}
+          </div>
 
 
+          <div className="title-header"><h2>📈 Statistical Analysis</h2></div>
+          
+          <div className="statistic-card">
+            <div className="statistic-card-header">Budget Efficiency</div>
 
-                <div>
-                  <h2>{forecastChartTypes.find(type => type.value === forcastChartType)?.label}</h2>
-                  <Chart
-                    chartType={forcastChartType}
-                    data={currentChartData}
-                    availableCategories={availableCategories}
-                    selectedCategory={selectedCategory}
-                    categoryColors={categoryColors}
-                    height={750} />
+            <div className='progress-bar'>
+              <div className={`progress-fill ${progressIndicator}`}
+                style={{ width: `${Math.min(budgetEfficiency, 100)}%` }}>
+              </div>
+            </div>
+            <span className="status-percentage">{Math.round(budgetEfficiency)}%</span>
 
-                </div>
-        
-            
           </div>
         </div>
       </div>
