@@ -18,3 +18,9 @@ REST API endpoints for seamless frontend-backend communication.
 Robust backend with Flask (Python) and Spring Boot (Java) using PostgreSQL for efficient data management.
 Responsive frontend built with React, JavaScript, and CSS.
 Will Integrate Personal Financial Assistant chatbot for intelligent, real-time financial guidance.
+
+TO DO:
+
+Integrate Personal Financial Assistant chatbot for intelligent, real-time financial guidance.
+Containerise applicaiton using Docker
+Deploy project for public access and move on from localhost
