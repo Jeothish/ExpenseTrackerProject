@@ -11,17 +11,18 @@ import matplotlib.pyplot as plt
 from prophet import Prophet
 import math
 from tqdm import tqdm
+import os
 
 
+def get_db_connection():
+    return psycopg2.connect(
+        os.environ.get('DATABASE_URL')
+    )
+    
+    
 def predict_spending_per_category():
     #Connects to PostgreSQL database
-    database_connection = psycopg2.connect(
-        dbname="${DB_NAME}",
-        user="${DB_USER}",
-        password="REMOVED_SECRET",
-        host="localhost",
-        port="5432",
-    )
+    database_connection = get_db_connection()
     #Gets total spending per month
     query="""
 

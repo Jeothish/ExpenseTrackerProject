@@ -6,26 +6,23 @@ This script connects to the 'expense_tracker_db PostgreSQL database to get expen
 """
 
 
-
+import os
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
 from prophet import Prophet
 
 
-def predict_total_spending():
+def get_db_connection():
+    return psycopg2.connect(
+        os.environ.get('DATABASE_URL')
+    )
     
+def predict_total_spending():
     
 
     #Connects to PostgreSQL database
-    database_connection = psycopg2.connect(
-        dbname="${DB_NAME}",
-        user="${DB_USER}",
-        password="REMOVED_SECRET",
-        host="localhost",
-        port="5432",
-    )
-
+    database_connection = get_db_connection()
 
     #Gets total spending per month
     query="""

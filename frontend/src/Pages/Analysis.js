@@ -88,6 +88,7 @@ const Analysis = () => {
             data={currentChartData}
             availableCategories={availableCategories}
             selectedCategory={selectedCategory}
+            
             budgets={budgets}
             categoryColors={categoryColors}
             height={750} />

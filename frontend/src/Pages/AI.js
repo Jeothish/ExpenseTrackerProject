@@ -112,7 +112,7 @@ const AI = () => {
 
 
           <div className="title-header"><h2>📈 Statistical Analysis</h2></div>
-          
+
           <div className="statistic-card">
             <div className="statistic-card-header">Budget Efficiency</div>
 

@@ -1,5 +1,6 @@
 from flask import Flask,jsonify
 from flask_cors import CORS
+import os
 import psycopg2
 import pandas as pd
 from spending_insights import get_insights
@@ -12,12 +13,9 @@ CORS(app)
 
 def get_db_connection():
     return psycopg2.connect(
-    dbname="${DB_NAME}",
-    user="${DB_USER}",
-    password="REMOVED_SECRET",
-    host="localhost",
-    port="5432",
+        os.environ.get('DATABASE_URL')
     )
+    
 
 @app.route("/insights",methods=['GET'])
 def insights_route():
@@ -34,5 +32,5 @@ def category_spending_route():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
     

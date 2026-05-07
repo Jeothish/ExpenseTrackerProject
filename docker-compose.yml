@@ -1,0 +1,47 @@
+services:
+  postgres-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+
+  ai-service:
+    build: ./MLmodel
+    volumes:
+      - ./MLmodel:/app
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres-db:5432/${DB_NAME}
+      FLASK_ENV: development
+    depends_on:
+      - postgres-db
+
+  java-backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres-db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      - postgres-db
+
+  react-ui:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=300
+      - WATCHPACK_POLLING=true

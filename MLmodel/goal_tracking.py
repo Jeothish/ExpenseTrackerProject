@@ -1,13 +1,18 @@
+
+from flask import Flask,jsonify
 import psycopg2
 import pandas as pd
+import os
+app = Flask(__name__)
 
-database_connection = psycopg2.connect(
-    dbname="your_details",
-    user="your_details",
-    password="your_details",
-    host="your_details",
-    port="your_details",
-)
+
+def get_db_connection():
+    return psycopg2.connect(
+        os.environ.get('DATABASE_URL')
+    )
+    
+    
+database_connection = get_db_connection()
 
 query = """
 

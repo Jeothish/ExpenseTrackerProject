@@ -1,15 +1,15 @@
 import psycopg2
 import pandas as pd
+import os
 
-
-def get_insights():
-    database_connection = psycopg2.connect(
-    dbname="${DB_NAME}",
-    user="${DB_USER}",
-    password="REMOVED_SECRET",
-    host="localhost",
-    port="5432",
+def get_db_connection():
+    return psycopg2.connect(
+        os.environ.get('DATABASE_URL')
     )
+    
+    
+def get_insights():
+    database_connection = get_db_connection()
     
     query = """
 
