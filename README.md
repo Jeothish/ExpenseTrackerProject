@@ -1,7 +1,7 @@
 
 # Personal-Financial-Tracker
 
-Technologies: Python (Flask), Java (Spring Boot, Maven, JPA), React, JavaScript, CSS, PostgreSQL, Machine Learning(Future plan)
+Technologies: Python (Flask), Java (Spring Boot, Maven, JPA), React, JavaScript, CSS, PostgreSQL,Docker,Machine Learning(Future plan)
 
 Overview:
 
@@ -22,5 +22,4 @@ Will Integrate Personal Financial Assistant chatbot for intelligent, real-time f
 TO DO:
 
 Integrate Personal Financial Assistant chatbot for intelligent, real-time financial guidance.
-Containerise applicaiton using Docker
 Deploy project for public access and move on from localhost
